@@ -2,8 +2,8 @@
 //     - Tests
 //     - Median & mode function without allocation?
 
-pub const chiSquare = @import("stats/chiSquare.zig");
-pub const normal = @import("stats/normal.zig");
+pub const chiSquare = @import("dist/chiSquare.zig");
+pub const normal = @import("dist/normal.zig");
 
 /// Return the mean of a dataset
 /// Expects T to be a floating point type
