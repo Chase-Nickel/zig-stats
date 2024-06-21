@@ -1,3 +1,5 @@
+//! Chi squared hypothesis tests
+
 /// Returns the p-value obtained by performing a Chi-squared Hypothesis Test
 /// for Goodness of Fit Test
 /// H0: The population distribution is uniformly distributed

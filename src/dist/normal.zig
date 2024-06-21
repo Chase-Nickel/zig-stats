@@ -1,3 +1,5 @@
+//! Normal distribution
+
 const Self = @This();
 
 mean: f64,

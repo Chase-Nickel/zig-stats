@@ -1,3 +1,5 @@
+//! Chi squared distribution
+
 const Self = @This();
 
 /// Degrees of freedom
