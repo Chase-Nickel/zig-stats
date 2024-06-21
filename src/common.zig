@@ -4,6 +4,8 @@
 pub const default_delta = 10e-4;
 pub const default_epsilon = 10e-4;
 
+pub const sqrt1_tau = @sqrt(std.math.tau);
+
 pub fn numericIntegral(
     comptime T: type,
     lower_bound: T,
@@ -54,6 +56,15 @@ pub fn lowerIncompleteGamma(comptime T: type, s: T, x: T, delta: ?T) f64 {
 /// Note: will be replaced by https://github.com/ziglang/zig/issues/7212
 pub fn regularizedGamma(comptime T: type, s: T, x: T, delta: ?T) T {
     return lowerIncompleteGamma(T, s, x, delta) / std.math.gamma(T, s);
+}
+
+pub fn erf(comptime T: type, x: T) T {
+    const func = struct {
+        fn func(t: T) T {
+            return @exp(-t * t);
+        }
+    }.func;
+    return std.math.two_sqrtpi * numericIntegral(T, 0.0, x, func, null);
 }
 
 const std = @import("std");

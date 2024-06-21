@@ -2,9 +2,6 @@ const Self = @This();
 
 mean: f64,
 stdev: f64,
-sample_info: ?struct {
-    data: []const f64,
-},
 
 // Initialize a normal distribution from distribution parameters
 pub fn fromParameters(mean: f64, stdev: f64) Self {
@@ -43,16 +40,15 @@ pub fn mad(self: Self) f64 {
 }
 
 pub fn pdf(self: Self, x: f64) f64 {
-    _ = self; // autofix
-    _ = x; // autofix
-    @compileError("Not implemented");
+    const coeff = common.sqrt1_tau * (1.0 / self.stdev);
+    const exponent = -0.5 * std.math.pow(f64, (x - self.mean) / self.stdev, 2.0);
+    return coeff * @exp(exponent);
 }
 
 pub fn cdf(self: Self, x: f64) f64 {
-    _ = self; // autofix
-    _ = x; // autofix
-    @compileError("Not implemented");
+    return 0.5 * (1.0 + common.erf((x - self.mean) / (self.stdev * @sqrt(2))));
 }
 
+const common = @import("../common.zig");
 const stats = @import("../stats.zig");
 const std = @import("std");
